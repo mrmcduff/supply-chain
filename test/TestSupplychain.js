@@ -47,54 +47,54 @@ beforeEach(async () => {
 
 describe('Testing functionality for the SupplyChain contract', () => {
     // 1st Test
-    it("Testing smart contract function harvestItem() that allows a farmer to harvest coffee",
-        async () => {
-            // Mark an item as Harvested by calling function harvestItem()
-            let hv = await supplyChain.harvestItem(
-                upc,
-                originFarmerID,
-                originFarmName,
-                originFarmInformation,
-                originFarmLatitude,
-                originFarmLongitude,
-                productNotes)
-            truffleAssert.eventEmitted(hv, 'Harvested');
-            // Retrieve the just now saved item from blockchain by calling function fetchItem()
-            const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
-            const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc)
-            console.log(resultBufferOne);
-            // Verify the result set
-            assert.equal(resultBufferOne[0].words[0], sku, 'Error: Invalid item SKU')
-            assert.equal(resultBufferOne[1].words[0], upc, 'Error: Invalid item UPC')
-            assert.equal(resultBufferOne[2], ownerID, 'Error: Missing or Invalid ownerID')
-            assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
-            assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
-            assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
-            assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
-            assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
-            assert.equal(resultBufferTwo[5], 0, 'Error: Invalid item State')
-            // assert.equal(eventEmitted, true, 'Invalid event emitted')
-        });
+    it("Testing smart contract function harvestItem() that allows a farmer to harvest coffee", async () => {
+        // Mark an item as Harvested by calling function harvestItem()
+        let hv = await supplyChain.harvestItem(
+            upc,
+            originFarmerID,
+            originFarmName,
+            originFarmInformation,
+            originFarmLatitude,
+            originFarmLongitude,
+            productNotes)
+        truffleAssert.eventEmitted(hv, 'Harvested');
+        // Retrieve the just now saved item from blockchain by calling function fetchItem()
+        const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
+        const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc)
+        console.log(resultBufferOne);
+        // Verify the result set
+        assert.equal(resultBufferOne[0].words[0], sku, 'Error: Invalid item SKU')
+        assert.equal(resultBufferOne[1].words[0], upc, 'Error: Invalid item UPC')
+        assert.equal(resultBufferOne[2], ownerID, 'Error: Missing or Invalid ownerID')
+        assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
+        assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
+        assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
+        assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
+        assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
+        assert.equal(resultBufferTwo[5], 0, 'Error: Invalid item State')
+    });
 
     // 2nd Test
-    it("Testing smart contract function processItem() that allows a farmer to process coffee",
-        async () => {
+    it("Testing smart contract function processItem() that allows a farmer to process coffee", async () => {
+        // Mark an item as Processed by calling function processItem()
+        let pr = await supplyChain.processItem(upc);
+        truffleAssert.eventEmitted(pr, 'Processed');
 
-            // Declare and Initialize a variable for event
+        // Retrieve the just now saved item from blockchain by calling function fetchItem()
+        const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
+        const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc)
 
-
-            // Watch the emitted event Processed()
-
-
-            // Mark an item as Processed by calling function processtItem()
-
-
-            // Retrieve the just now saved item from blockchain by calling function fetchItem()
-
-
-            // Verify the result set
-
-        });
+        // Verify the result set
+        assert.equal(resultBufferOne[0].words[0], sku, 'Error: Invalid item SKU')
+        assert.equal(resultBufferOne[1].words[0], upc, 'Error: Invalid item UPC')
+        assert.equal(resultBufferOne[2], ownerID, 'Error: Missing or Invalid ownerID')
+        assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
+        assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
+        assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
+        assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
+        assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
+        assert.equal(resultBufferTwo[5], 1, 'Error: Invalid item State')
+    });
 
     // 3rd Test
     it("Testing smart contract function packItem() that allows a farmer to pack coffee", async () => {
@@ -106,33 +106,46 @@ describe('Testing functionality for the SupplyChain contract', () => {
 
 
         // Mark an item as Packed by calling function packItem()
-
+        const pk = await supplyChain.packItem(upc);
+        truffleAssert.eventEmitted(pk, 'Packed');
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-
+        const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
+        const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc)
 
         // Verify the result set
-
-    })
+        assert.equal(resultBufferOne[0].words[0], sku, 'Error: Invalid item SKU')
+        assert.equal(resultBufferOne[1].words[0], upc, 'Error: Invalid item UPC')
+        assert.equal(resultBufferOne[2], ownerID, 'Error: Missing or Invalid ownerID')
+        assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
+        assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
+        assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
+        assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
+        assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
+        assert.equal(resultBufferTwo[5], 2, 'Error: Invalid item State')
+    });
 
     // 4th Test
     it("Testing smart contract function sellItem() that allows a farmer to sell coffee", async () => {
-
-        // Declare and Initialize a variable for event
-
-
-        // Watch the emitted event ForSale()
-
-
         // Mark an item as ForSale by calling function sellItem()
-
+        const si = await supplyChain.sellItem(1, 5);
+        truffleAssert.eventEmitted(si, 'ForSale');
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-
+        const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
+        const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc)
 
         // Verify the result set
-
-    })
+        assert.equal(resultBufferOne[0].words[0], sku, 'Error: Invalid item SKU')
+        assert.equal(resultBufferOne[1].words[0], upc, 'Error: Invalid item UPC')
+        assert.equal(resultBufferOne[2], ownerID, 'Error: Missing or Invalid ownerID')
+        assert.equal(resultBufferOne[3], originFarmerID, 'Error: Missing or Invalid originFarmerID')
+        assert.equal(resultBufferOne[4], originFarmName, 'Error: Missing or Invalid originFarmName')
+        assert.equal(resultBufferOne[5], originFarmInformation, 'Error: Missing or Invalid originFarmInformation')
+        assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
+        assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
+        assert.equal(resultBufferTwo[5], 3, 'Error: Invalid item State')
+    });
 
     // 5th Test
     it("Testing smart contract function buyItem() that allows a distributor to buy coffee", async () => {
