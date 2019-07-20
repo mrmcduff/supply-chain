@@ -20,6 +20,7 @@
     },
     "devDependencies": {
         "lite-server": "2.4.0",
-        "truffle-assertions": "^0.9.1"
+        "truffle-assertions": "^0.9.1",
+        "truffle-test-utils": "^0.1.0"
     }
 }

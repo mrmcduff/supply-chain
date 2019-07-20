@@ -202,8 +202,6 @@ contract SupplyChain is Ownable, ConsumerRole, DistributorRole, FarmerRole, Reta
         string memory _productNotes
     ) public onlyFarmer {
         // Add the new item as part of Harvest
-        // Increment sku
-        sku = sku + 1;
         Item memory newlyHarvested = Item({
             sku: sku,
             upc: _upc,
@@ -213,7 +211,7 @@ contract SupplyChain is Ownable, ConsumerRole, DistributorRole, FarmerRole, Reta
             originFarmInformation: _originFarmInformation,
             originFarmLatitude: _originFarmLatitude,
             originFarmLongitude: _originFarmLongitude,
-            productID: sku + 1000 * _upc,
+            productID: 0,
             productNotes: _productNotes,
             productPrice: 0,
             itemState: State.Harvested,
@@ -222,6 +220,8 @@ contract SupplyChain is Ownable, ConsumerRole, DistributorRole, FarmerRole, Reta
             consumerID: address(0)
         });
         items[_upc] = newlyHarvested;
+        // Increment sku
+        sku = sku + 1;
         emit Harvested(_upc);
     }
 
