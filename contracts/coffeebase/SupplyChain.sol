@@ -161,7 +161,7 @@ contract SupplyChain is Ownable, ConsumerRole, DistributorRole, FarmerRole, Reta
     modifier received(uint _upc) {
         require (
             items[_upc].itemState == State.Received,
-            "Item is not recieved"
+            "Item is not received"
         );
         _;
     }
