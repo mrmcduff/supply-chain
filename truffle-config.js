@@ -23,8 +23,6 @@
  */
 
 const HDWalletProvider = require('truffle-hdwallet-provider');
-// const infuraKey = "fj4jll3k.....";
-//
 const fs = require('fs');
 const mnemonic = fs.readFileSync('.mnemonic').toString().trim();
 const infuraKey = fs.readFileSync('.infurakey').toString().trim();
@@ -59,7 +57,10 @@ module.exports = {
 
         rinkeby: {
             provider: function () {
-                return new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`);
+                console.log('I am using the provider');
+                const provider = new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`);
+                // console.log(provider);
+                return provider;
             },
             host: "127.0.0.1",
             port: 8545,
