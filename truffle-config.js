@@ -57,16 +57,13 @@ module.exports = {
 
         rinkeby: {
             provider: function () {
-                console.log('I am using the provider');
-                const provider = new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`);
-                // console.log(provider);
-                return provider;
+                return new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`);
             },
-            host: "127.0.0.1",
-            port: 8545,
+            // host: "127.0.0.1",
+            // port: 8545,
             network_id: 4,
-            gas: 4500000,           // Gas sent with each transaction (default: ~6700000)
-            gasPrice: 10000000000,  // 10 gwei (in wei) (default: 100 gwei)
+            // gas: 4500000,           // Gas sent with each transaction (default: ~6700000)
+            // gasPrice: 100000000000,  // 100 gwei (in wei) (default: 100 gwei)
         },
         // Another network with more advanced options...
         // advanced: {
